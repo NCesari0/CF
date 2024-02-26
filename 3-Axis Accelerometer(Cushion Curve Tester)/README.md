@@ -1,1 +1,1 @@
-efasdfasdfasdfasdf
+In order to measure the cushioning properties of our company's foam, I worked with a colleague on developing a mock cushion curve tester. Industry standard testing machines were pricey so we developed our own method to accomplish this feat. The following code attempts to transfer data from a 3-axis accelerometer connected to an Arduino to a python file able to translate this data into a readable acceleration impulse. 
