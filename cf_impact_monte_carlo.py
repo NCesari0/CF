@@ -8,7 +8,6 @@ Original file is located at
 
 Import Packages
 """
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -79,8 +78,7 @@ iter_il = iter(index_list)
 # Make Dataframe of New Impact Factors
 idf = pd.DataFrame(i_list, index = index_list)
 idf2 = idf.T
-#print(i_list)
-#print(idf2)
+
   # Loop through New Imp DataFrame
 for val in range(0,10,1):
     index = next(iter_il)
@@ -91,32 +89,14 @@ for val in range(0,10,1):
     mmmlist.append(imin)
     mmmlist.append(imax)
     mmmlist.append(imean)
-    # Other method
-    #mmm = [imin,imax,imean]
-    #new_dict = {minmaxmean: mmm for minmaxmean, mmm in zip(minmaxmean, mmm)}
-    #mmmlist.append(new_dict)
 
-  # Go from 1D List to 2D list
-#mmm_2D = to_matrix(mmmlist,3) # <-- n = N
-#new_dict = {index_list: mmmlist for index_list, mmmlist in zip(index_list, mmmlist)}
-
-#print(new_dict)
-
-#idf4 = pd.DataFrame(mmm_2D, index = index_list, columns=['Min','Max','Mean'])
 idf4 = pd.DataFrame(mmmlist)
 idf5= idf4.T
-#print(idf5)
-'''
-idf5['Flower Type'] = index_list
-idf6 = idf5.set_index('Flower Type', append=True).unstack('Flower Type')
-print(idf6)
-'''
 
 """Monte Carlo Function"""
 
 from numpy.core.fromnumeric import mean
 import matplotlib.pyplot as plt
-
 
 # Function for 1D List to 2D List
 def to_matrix(l, n):
@@ -161,27 +141,13 @@ def monte_carlo(ingrednum,sim_num):
     print(idf3.max(), 'Max')
     print(np.mean(idf3), 'Mean')
     print(' ')
-    # Method 2
-    #mmmlist.append(imin)
-    #mmmlist.append(imax)
-    #mmmlist.append(imean)
-    #Other Method
-    #mmm = [imin,imax,imean]
-    #new_dict = {minmaxmean: mmm for minmaxmean, mmm in zip(minmaxmean, mmm)}
-    #mmmlist.append(new_dict)
 
   # Go from 1D List to 2D list
   mmm_2D = to_matrix(mmmlist,3) # <-- n = N
-#new_dict = {index_list: mmmlist for index_list, dflist in zip(index_list, mmmlist)}
 
   # Output DataFrame
   idf4 = pd.DataFrame(mmm_2D, index = index_list, columns=['Min','Max','Mean'])
   idf5= idf4.T
-
-  #updated -- Needs work
-  #idf4 = pd.DataFrame(mmmlist)
-  #idf5= idf4.T
-  #yield idf5
 
 """ Single Ingredient"""
 
@@ -203,30 +169,3 @@ ingredients = ingredrow.values
 for val in range(0,ingred_quantity,1):
   print(ingredrow[val])
   monte_carlo(val,10000)
-
-'''
-# Other Method
-
-frames = []
-for val in range(0,ingred_quantity,1):
-  print(ingredrow[val])
-  for value in monte_carlo(val,10000):
-    frames.append(value)
-result = pd.concat(frames)
-print(result)
-
-#df_merged = reduce(lambda  left,right: pd.merge(left,right,on= minmaxmean,how='outer'), frames)
-'''
-
-'''
-header = pd.MultiIndex.from_product([ingredients,
-                                     index_list],)
-                                     ##names=['loc','S']
-bigdf = pd.DataFrame(df_merged)
-#columns=header
-#bigdf = pd.DataFrame(result)
-'''
-
-'''
-result.to_csv('raw_data.csv', index=True)
-'''
